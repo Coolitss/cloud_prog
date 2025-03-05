@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form with Records</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .records {
+      margin-top: 20px;
+    }
+    .record {
+      margin: 5px 0;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Form with Records</h1>
+  <form id="recordForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" min="1" required><br><br>
+    <button type="button" id="submitBtn">Submit</button>
+    <button type="button" id="displayBtn">Display Records</button>
+  </form>
+
+  <div class="records" id="recordsContainer">
+    <h2>Records:</h2>
+    <!-- Records will appear here -->
+  </div>
+
+  <script>
+    const records = []; // Array to store records
+    const form = document.getElementById("recordForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const displayBtn = document.getElementById("displayBtn");
+    const recordsContainer = document.getElementById("recordsContainer");
+
+    // Function to handle submit button click
+    submitBtn.addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const age = document.getElementById("age").value.trim();
+
+      if (name && age) {
+        records.push({ name, age });
+        form.reset(); // Clear the form fields
+        alert("Record added successfully!");
+      } else {
+        alert("Please fill in all fields.");
+      }
+    });
+
+    // Function to handle display records button click
+    displayBtn.addEventListener("click", () => {
+      // Clear the current records display
+      recordsContainer.innerHTML = "<h2>Records:</h2>";
+
+      if (records.length > 0) {
+        // Populate the container with records
+        records.forEach((record, index) => {
+          const recordElement = document.createElement("p");
+          recordElement.className = "record";
+          recordElement.textContent = `${index + 1}. Name: ${record.name}, Age: ${record.age}`;
+          recordsContainer.appendChild(recordElement);
+        });
+      } else {
+        // Show a message if no records exist
+        const noRecordsMessage = document.createElement("p");
+        noRecordsMessage.textContent = "No records available.";
+        recordsContainer.appendChild(noRecordsMessage);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Short Tweet</title>
+
+    <style>
+        body {
+            margin-top: 50px;
+        }
+
+        #qoute{
+            margin-top: 50px;
+        }
+
+        #modal{
+            padding: 10px;
+            background-color: yellow;
+            width: 100px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+
+    <h1> Student Short Tweet</h1>
+    <p>Programmed by: Doc. Fuentes 2023</p>
+
+    <h3 id="qoute"></h3>
+
+    <button id="generateButton">Generate Random Qoutes</button>
+
+    <div id="modal">Relax and Chill!</div>
+
+    <script>
+        function generateQoutes() {
+            const qoutes = [
+                "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+                "The only way to do great work is to love what you do.",
+                "Believe you can and you're halfway there.",
+                "In the middle of every difficulty lies opportunity.",
+                "The future belongs to those who believe in the beauty of their dreams."
+            ];
+
+            const randomIndex = Math.floor(Math.random() * qoutes.length);
+
+            const randomQoutes = qoutes[randomIndex];
+
+            document.getElementById("qoute").innerHTML = randomQoutes;
+        }
+
+        function displayReminder(){
+            const modal = document.getElementById("modal");
+            modal.style.display = "block";
+
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 3000);
+        }
+        setInterval(displayReminder, 5000);
+
+        document.getElementById("generateButton").addEventListener("click", generateQoutes);
+    </script>
+    </center>
+</body>
+</html>

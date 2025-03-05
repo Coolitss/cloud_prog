@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
+</head>
+<body>
+    <center>
+        <h1>Survey</h1>
+        <p>Please answer the following questions:</p>
+
+        <form id="form">
+            <label for="name">1. Name:</label>
+            <input type="text" name="name" id="name">
+            <br>
+            <br>
+            <label for="age">2. Age:</label>
+            <input type="text" name="age" id="age">
+            <br>
+            <br>
+            <label for="course">3. Course:</label>
+            <input type="text" name="course" id="course">
+            <br>
+            <br>
+            <label for="major">4. Major:</label>
+            <input type="text" name="major" id="major">
+            <br>
+            <br>
+            <label for="feedback">5. Feedback</label>
+            <textarea name="feedback" id="feedback"></textarea>
+            <br>
+            <br>
+            <button type="submit">6. Submit</button>
+            <br>
+            <br>
+        </form>
+        <button id="records">Display Records</button>
+        <h3>Records:</h3>
+        <div id="recDisp">
+            
+        </div>
+    </center>
+
+    <script>
+        let allRec = [];
+        const form = document.getElementById("form");
+        const records = document.getElementById("records")
+        const recDisp = document.getElementById("recDisp");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const course = document.getElementById("course").value;
+            const major = document.getElementById("major").value;
+            const feedback = document.getElementById("feedback").value;
+
+            allRec.push({name,age,course,major,feedback});
+            form.reset();
+        });
+
+        records.addEventListener("click", () => {
+            recDisp.innerHTML = "";
+            allRec.forEach((record, index) => {
+            const recordElement = document.createElement("p");
+            recordElement.className = "record";
+            recordElement.textContent = `${index + 1}. Name: ${record.name}, Age: ${record.age}, Course: ${record.course}, Major: ${record.major}, Feedback: ${record.feedback}`;
+            recDisp.appendChild(recordElement);
+        });
+        });
+    </script>
+</body>
+</html>
